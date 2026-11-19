@@ -1,0 +1,731 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>XSF Challenge</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="The XSF Challenge — San Francisco's premier urban endurance event.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+/* leaflet css inline (CDN stylesheet blocked in artifact, works fine on real hosting) */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:transparent}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,0.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}.leaflet-notouch .leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-animated{will-change:transform}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-popup-pane,.leaflet-control{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a.leaflet-active{outline:2px solid orange}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:Helvetica Neue,Arial,Helvetica,sans-serif;font-size:.75rem;font-size:12px;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:black}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover,.leaflet-bar a:focus{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in{font-size:22px}.leaflet-touch .leaflet-control-zoom-out{font-size:20px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(/layers.png);width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(/layers-2x.png);background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png)}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;font-size:11px;white-space:nowrap;overflow:hidden;-moz-box-sizing:border-box;box-sizing:border-box;background:#fff;background:rgba(255,255,255,.5)}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{box-shadow:none}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:white;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-attribution{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:""}.leaflet-tooltip-bottom:before{top:0;left:50%;margin-left:-6px;margin-top:-12px;border-bottom-color:#fff}.leaflet-tooltip-top:before{bottom:0;left:50%;margin-left:-6px;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-left:before{top:50%;right:0;margin-top:-6px;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{top:50%;left:0;margin-top:-6px;margin-left:-12px;border-right-color:#fff}
+
+/* ── TOKENS ── */
+:root {
+  --paper: #f7f5ec;
+  --ink: #18282a;
+  --orange: #f05324;
+  --aqua: #d1e3e3;
+  --muted: #687674;
+  --rule: #bec6bd;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1a1b;
+    --ink: #e8f0ee;
+    --aqua: #1a3030;
+    --muted: #8fa8a5;
+    --rule: #2a3c3b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1a1b;
+  --ink: #e8f0ee;
+  --aqua: #1a3030;
+  --muted: #8fa8a5;
+  --rule: #2a3c3b;
+  color-scheme: dark;
+}
+
+/* ── RESET / BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-brand:hover { text-decoration: none; }
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--orange); text-decoration: none; }
+
+/* ── HERO ── */
+.hero {
+  padding: 72px max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.18em;
+  flex-wrap: wrap;
+}
+.hero-title svg {
+  width: 0.62em;
+  height: 0.62em;
+  flex-shrink: 0;
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.65;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.hero-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  padding: 14px 32px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.cta-btn:hover { opacity: 0.88; text-decoration: none; color: #fff; }
+
+/* ── SECTION WRAPPER ── */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.section + .section { border-top: 1px solid var(--rule); }
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+.section-body {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ── MAP ── */
+#map {
+  width: 100%;
+  height: 460px;
+  border: 1px solid var(--rule);
+  margin-top: 32px;
+  background: var(--aqua);
+}
+.map-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+.legend-line {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* ── ROUTE DETAILS ── */
+.route-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+@media (max-width: 540px) { .route-grid { grid-template-columns: 1fr; } }
+.route-card {
+  background: var(--aqua);
+  padding: 24px;
+  border-left: 3px solid var(--orange);
+}
+.route-card-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.route-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.route-card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.route-stat {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--orange);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-top: 10px;
+}
+.route-stat-unit {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+/* ── THE EVENT ── */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 28px;
+}
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.feature-item:first-child { padding-top: 0; }
+.feature-item:last-child { border-bottom: none; }
+.feature-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--orange);
+  line-height: 1;
+  min-width: 36px;
+}
+.feature-text h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.feature-text p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── RECAP STATS ── */
+.recap-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  margin-top: 32px;
+  border: 1px solid var(--rule);
+}
+@media (max-width: 540px) {
+  .recap-stats { grid-template-columns: repeat(2, 1fr); }
+}
+.recap-stat {
+  background: var(--paper);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.recap-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--orange);
+}
+.recap-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── DARK SECTION (2027 Event) ── */
+.section-dark {
+  background: var(--ink);
+  color: var(--paper);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 72px;
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+}
+.section-dark .section-label { color: var(--paper); opacity: 0.5; }
+.section-dark .section-title { color: var(--paper); }
+.section-dark .section-body { color: var(--paper); opacity: 0.75; }
+.section-dark .feature-item { border-color: rgba(255,255,255,0.12); }
+.section-dark .feature-text h4 { color: var(--paper); }
+.section-dark .feature-text p { color: var(--paper); opacity: 0.65; }
+
+/* ── SIGNUP FORM ── */
+.form-wrap {
+  background: var(--aqua);
+  padding: 40px 32px;
+  margin-top: 32px;
+}
+@media (max-width: 540px) { .form-wrap { padding: 28px 20px; } }
+.form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.form-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.form-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.form-optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  resize: vertical;
+}
+.form-field input:focus,
+.form-field textarea:focus { border-color: var(--orange); }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--muted); }
+.form-submit {
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  padding: 14px 32px;
+  border: none;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: opacity 0.15s;
+  width: 100%;
+}
+.form-submit:hover { opacity: 0.88; }
+.form-success {
+  display: none;
+  font-size: 0.9rem;
+  color: var(--orange);
+  font-weight: 600;
+  margin-top: 14px;
+}
+
+/* ── FOOTER ── */
+.footer-band {
+  border-top: 1px solid var(--rule);
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 36px max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  max-width: 900px;
+  margin: 0 auto;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-decoration: none;
+}
+.footer-brand:hover { color: var(--ink); text-decoration: none; }
+.footer-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  align-items: center;
+}
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.footer-links a:hover { color: var(--ink); }
+.footer-copy {
+  width: 100%;
+  font-size: 0.75rem;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+/* Leaflet dark mode tile invert */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .leaflet-tile { filter: invert(1) hue-rotate(180deg) brightness(0.85); }
+}
+:root[data-theme="dark"] .leaflet-tile { filter: invert(1) hue-rotate(180deg) brightness(0.85); }
+.leaflet-control-attribution { font-size: 10px !important; }
+</style>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">
+      <svg viewBox="0 0 60 60" fill="none" width="22" height="22" aria-hidden="true">
+        <polyline points="8,4 32,30 8,56" stroke="#f05324" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="52,4 28,30 52,56" stroke="var(--ink)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      XSF Challenge
+    </a>
+    <ul class="nav-links">
+      <li><a href="#route">Route</a></li>
+      <li><a href="#event">Event</a></li>
+      <li><a href="#signup">Stay in the loop</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">San Francisco · Urban Endurance</p>
+  <h1 class="hero-title">
+    <svg viewBox="0 0 60 60" fill="none" aria-hidden="true">
+      <polyline points="8,4 32,30 8,56" stroke="#f05324" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="52,4 28,30 52,56" stroke="var(--ink)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    XSF Challenge
+  </h1>
+  <p class="hero-sub">A self-supported urban endurance adventure across San Francisco. Two legs. One long day. Golden Gate Bridge to the Embarcadero, on foot.</p>
+  <div class="hero-meta">
+    <span class="hero-pill"><span class="dot"></span>Golden Gate to Embarcadero</span>
+    <span class="hero-pill"><span class="dot"></span>~34 miles total</span>
+    <span class="hero-pill"><span class="dot"></span>Self-supported</span>
+    <span class="hero-pill"><span class="dot" style="background:var(--orange)"></span>Next: April 10, 2027</span>
+  </div>
+  <a class="cta-btn" href="#signup">Stay in the Loop</a>
+</header>
+
+<!-- ROUTE MAP -->
+<section class="section" id="route">
+  <p class="section-label">The Route</p>
+  <h2 class="section-title">Across the city, twice</h2>
+  <p class="section-body">The XSF Challenge traces two distinct legs across San Francisco — from the Golden Gate Bridge south through the neighborhoods to Candlestick, then back north from Lake Merced to the Embarcadero. The gap between legs is intentional. You choose your crossing.</p>
+  <div id="map"></div>
+  <div class="map-legend">
+    <div class="legend-item">
+      <div class="legend-line" style="background:#f05324"></div>
+      Leg 1 — GGB South → Candlestick
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:var(--ink);border:1px solid var(--rule)"></div>
+      Leg 2 — Lake Merced → Embarcadero
+    </div>
+  </div>
+  <div class="route-grid">
+    <div class="route-card">
+      <div class="route-card-label">Leg 1</div>
+      <h3>GGB South → Candlestick</h3>
+      <p>Starting at the south anchorage of the Golden Gate Bridge, the first leg traces a path through the Richmond, Inner Sunset, and Bayview neighborhoods to Candlestick Point.</p>
+      <div class="route-stat">~26<span class="route-stat-unit">km</span></div>
+    </div>
+    <div class="route-card">
+      <div class="route-card-label">Leg 2</div>
+      <h3>Lake Merced → Embarcadero</h3>
+      <p>The return leg begins at Lake Merced and winds north through the Sunset, Western Addition, and Financial District to finish at the Embarcadero waterfront.</p>
+      <div class="route-stat">~24<span class="route-stat-unit">km</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2026 RECAP -->
+<section class="section" id="2026">
+  <p class="section-label">Year One · April 18, 2026</p>
+  <h2 class="section-title">The inaugural crossing</h2>
+  <p class="section-body">Six people set out before dawn. Five finished after dark. Approximately 33.6 miles through nearly every neighborhood in the city — stairs, ridgelines, parks, and streets most people only ever drive.</p>
+  <div class="recap-stats">
+    <div class="recap-stat">
+      <div class="recap-num">6</div>
+      <div class="recap-label">Starters</div>
+    </div>
+    <div class="recap-stat">
+      <div class="recap-num">5</div>
+      <div class="recap-label">Finishers</div>
+    </div>
+    <div class="recap-stat">
+      <div class="recap-num">~33.6</div>
+      <div class="recap-label">Miles</div>
+    </div>
+    <div class="recap-stat">
+      <div class="recap-num">1</div>
+      <div class="recap-label">Long day</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2027 EVENT -->
+<section class="section section-dark" id="event">
+  <p class="section-label" style="opacity:0.5">Year Two · 2027</p>
+  <h2 class="section-title">Saturday, April 10, 2027</h2>
+  <p class="section-body">The second XSF crossing is confirmed. Same format: start at the bridge before sunrise, finish at the Embarcadero after dark. The annual group outing is personally organized and invitation-based — a small group of friends, not an open race.</p>
+  <div class="feature-list">
+    <div class="feature-item">
+      <div class="feature-num">01</div>
+      <div class="feature-text">
+        <h4>Invitation-based</h4>
+        <p>The annual group crossing is personally organized. It's a small, privately assembled group — not an open registration event. No entry fees, no bibs, no timing chips.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">02</div>
+      <div class="feature-text">
+        <h4>Self-supported</h4>
+        <p>No aid stations, no crew. Plan your nutrition and gear like any backcountry objective — but you're in the city, so corner stores and water fountains are fair game.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">03</div>
+      <div class="feature-text">
+        <h4>Open to anyone independently</h4>
+        <p>The routes are public and permanent. Anyone can walk or run the Crosstown Trail and Double Cross any time, with or without the annual group. Good navigation resources are online.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">04</div>
+      <div class="feature-text">
+        <h4>A tradition worth repeating</h4>
+        <p>The goal is a repeatable annual event that deepens friendships and creates something with a future — not an organization, not a production, not another job.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAY IN THE LOOP -->
+<section class="section" id="signup">
+  <p class="section-label">Updates</p>
+  <h2 class="section-title">Stay in the loop</h2>
+  <p class="section-body">Leave your name and email and we'll reach out if there's something worth sharing — route updates, the occasional community outing, or news about the 2027 crossing. This is not an event registration form.</p>
+  <div class="form-wrap">
+    <div class="form-title">Get notified</div>
+    <p class="form-sub">No spam. Just the info you need, when it matters.</p>
+    <form id="signup-form" action="https://docs.google.com/forms/d/e/1FAIpQLScrL-U_GfblL0NvIzk9bak3InLwR4ATSOHSqmojyDtg6Y9sdQ/formResponse" method="POST" target="signup-hidden">
+      <div class="form-field">
+        <label for="signup-name">Name</label>
+        <input type="text" id="signup-name" name="entry.1824367441" placeholder="Your name" required autocomplete="name">
+      </div>
+      <div class="form-field">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" name="entry.119515455" placeholder="your@email.com" required autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label for="signup-comment">Comment <span class="form-optional">(optional)</span></label>
+        <textarea id="signup-comment" name="entry.1798185973" placeholder="Anything you'd like to share — how you heard about this, what you're curious about, or just a hello." rows="3"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send it</button>
+      <p class="form-success" id="form-success">Got it — thanks. We'll be in touch.</p>
+    </form>
+    <iframe name="signup-hidden" style="display:none" aria-hidden="true"></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-band">
+  <footer class="footer">
+    <a class="footer-brand" href="#">
+      <svg viewBox="0 0 60 60" fill="none" width="17" height="17" aria-hidden="true">
+        <polyline points="8,4 32,30 8,56" stroke="#f05324" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="52,4 28,30 52,56" stroke="var(--ink)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      XSF Challenge
+    </a>
+    <ul class="footer-links">
+      <li><a href="mailto:hello@xsfchallenge.com">hello@xsfchallenge.com</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 XSF Challenge. San Francisco, CA.</p>
+  </footer>
+</div>
+
+<script>
+// ── MAP INIT ──
+(function() {
+  var map = L.map('map', {
+    center: [37.76, -122.44],
+    zoom: 12,
+    zoomControl: true,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Leg 1: GGB South → Candlestick (orange)
+  var leg1 = [[37.80809,-122.47594],[37.80792,-122.47581],[37.8078,-122.47543],[37.80783,-122.47524],[37.80827,-122.47533],[37.80867,-122.47568],[37.80859,-122.47601],[37.80839,-122.47633],[37.80821,-122.47662],[37.80793,-122.477],[37.80755,-122.47696],[37.80718,-122.47698],[37.80666,-122.47703],[37.80618,-122.47696],[37.80576,-122.47659],[37.80535,-122.47653],[37.80496,-122.47682],[37.80469,-122.47698],[37.80437,-122.4769],[37.80407,-122.477],[37.80366,-122.47727],[37.80326,-122.47736],[37.80277,-122.47763],[37.80231,-122.47776],[37.80201,-122.47779],[37.80163,-122.47757],[37.80117,-122.47765],[37.80078,-122.47791],[37.80033,-122.47828],[37.79986,-122.47838],[37.79933,-122.47854],[37.79878,-122.47881],[37.7983,-122.47902],[37.798,-122.47898],[37.79759,-122.47877],[37.79728,-122.47872],[37.797,-122.47921],[37.79679,-122.47945],[37.79679,-122.47947],[37.79651,-122.4796],[37.79616,-122.47975],[37.79576,-122.47986],[37.79554,-122.48024],[37.79524,-122.48055],[37.79459,-122.48051],[37.79432,-122.48048],[37.79374,-122.48059],[37.79326,-122.48084],[37.79288,-122.48095],[37.79248,-122.48106],[37.79197,-122.48107],[37.79134,-122.48128],[37.79074,-122.48148],[37.7902,-122.48166],[37.78954,-122.48189],[37.78896,-122.4821],[37.78849,-122.48238],[37.78808,-122.48288],[37.78794,-122.48312],[37.78774,-122.4836],[37.78763,-122.48402],[37.78758,-122.4845],[37.78756,-122.48491],[37.78753,-122.48551],[37.78749,-122.48636],[37.78748,-122.48691],[37.78744,-122.48749],[37.78743,-122.48783],[37.78758,-122.48858],[37.78754,-122.48913],[37.78737,-122.4895],[37.787,-122.48953],[37.78665,-122.48971],[37.78653,-122.4899],[37.78632,-122.49025],[37.78611,-122.49094],[37.78607,-122.4915],[37.78619,-122.49194],[37.78643,-122.49233],[37.78655,-122.4926],[37.7866,-122.49288],[37.78663,-122.49344],[37.78658,-122.49382],[37.78661,-122.49453],[37.78668,-122.49464],[37.78671,-122.4948],[37.78665,-122.4952],[37.78658,-122.4959],[37.78662,-122.49639],[37.7866,-122.49666],[37.78662,-122.49728],[37.78668,-122.49741],[37.78693,-122.49786],[37.78736,-122.49839],[37.7876,-122.49897],[37.78774,-122.49968],[37.78749,-122.50002],[37.78732,-122.5005],[37.78736,-122.50072],[37.78725,-122.50092],[37.78709,-122.50103],[37.78704,-122.50114],[37.78723,-122.50142],[37.78736,-122.50171],[37.78734,-122.50183],[37.78736,-122.50199],[37.78736,-122.50218],[37.78732,-122.50235],[37.78724,-122.50257],[37.78719,-122.50283],[37.78705,-122.50323],[37.78708,-122.50319],[37.78699,-122.50339],[37.78682,-122.50397],[37.78681,-122.50439],[37.78655,-122.50514],[37.78606,-122.50511],[37.78559,-122.50515],[37.78513,-122.50526],[37.7849,-122.50566],[37.78467,-122.50585],[37.78459,-122.50637],[37.78449,-122.50684],[37.78463,-122.50751],[37.78454,-122.50796],[37.78442,-122.50839],[37.7842,-122.50898],[37.78393,-122.5096],[37.78391,-122.50968],[37.78385,-122.50974],[37.78358,-122.51011],[37.78348,-122.51086],[37.78335,-122.51141],[37.78288,-122.51176],[37.78233,-122.51162],[37.78206,-122.51179],[37.78189,-122.5121],[37.78147,-122.51209],[37.7811,-122.51175],[37.78084,-122.51197],[37.78051,-122.51195],[37.77991,-122.51177],[37.77946,-122.51169],[37.77925,-122.51217],[37.77917,-122.5126],[37.77918,-122.5131],[37.77911,-122.51359],[37.77893,-122.51378],[37.77854,-122.5138],[37.77814,-122.5136],[37.77777,-122.51332],[37.77752,-122.51299],[37.77714,-122.51264],[37.77682,-122.51226],[37.77646,-122.51197],[37.77598,-122.51189],[37.77539,-122.51181],[37.77471,-122.51173],[37.77408,-122.51166],[37.77331,-122.51156],[37.77275,-122.51149],[37.77229,-122.51143],[37.77165,-122.51137],[37.7712,-122.5113],[37.77067,-122.51124],[37.77034,-122.51085],[37.77029,-122.51043],[37.77011,-122.50994],[37.76995,-122.5095],[37.76959,-122.5089],[37.76928,-122.50855],[37.76889,-122.50817],[37.76847,-122.50779],[37.76809,-122.50752],[37.76782,-122.50733],[37.76741,-122.5071],[37.76714,-122.50695],[37.76685,-122.50666],[37.76659,-122.50627],[37.76644,-122.50591],[37.76619,-122.50548],[37.76589,-122.50488],[37.76567,-122.50427],[37.7655,-122.5037],[37.7654,-122.50301],[37.76523,-122.50231],[37.76514,-122.50183],[37.76501,-122.50104],[37.76488,-122.50022],[37.76494,-122.49936],[37.76515,-122.49861],[37.76529,-122.49797],[37.76539,-122.4975],[37.7655,-122.4969],[37.76558,-122.4962],[37.76563,-122.49556],[37.76565,-122.49503],[37.76563,-122.49443],[37.76562,-122.49374],[37.76556,-122.49304],[37.76549,-122.49199],[37.76549,-122.49134],[37.76552,-122.49073],[37.76552,-122.49025],[37.76562,-122.48955],[37.76572,-122.48888],[37.76585,-122.48834],[37.76617,-122.48761],[37.7665,-122.48709],[37.76685,-122.48641],[37.76707,-122.48567],[37.76704,-122.48527],[37.76693,-122.48478],[37.76675,-122.48433],[37.76667,-122.48373],[37.76678,-122.48293],[37.76689,-122.48215],[37.76687,-122.48142],[37.76681,-122.48087],[37.76669,-122.48037],[37.7665,-122.47984],[37.76634,-122.47949],[37.76621,-122.47919],[37.76605,-122.47881],[37.76597,-122.47843],[37.76553,-122.47831],[37.76534,-122.47816],[37.76533,-122.47761],[37.76532,-122.47749],[37.76491,-122.47748],[37.76436,-122.47746],[37.76382,-122.47739],[37.76369,-122.47701],[37.76373,-122.47654],[37.76375,-122.47597],[37.76379,-122.47537],[37.7638,-122.47475],[37.76386,-122.4741],[37.76338,-122.47404],[37.76295,-122.47399],[37.76263,-122.47392],[37.76221,-122.47396],[37.76175,-122.47388],[37.76137,-122.47385],[37.7611,-122.47384],[37.76082,-122.47382],[37.76041,-122.47378],[37.7601,-122.47377],[37.75988,-122.47364],[37.75979,-122.47363],[37.75972,-122.47363],[37.75964,-122.47361],[37.75954,-122.47359],[37.75949,-122.47353],[37.75952,-122.47357],[37.75943,-122.47352],[37.75928,-122.47364],[37.75877,-122.47369],[37.75844,-122.47365],[37.75801,-122.47363],[37.75761,-122.47359],[37.75725,-122.47349],[37.75699,-122.47339],[37.75711,-122.47331],[37.75664,-122.47349],[37.75639,-122.4736],[37.75626,-122.4736],[37.75628,-122.47344],[37.75627,-122.47331],[37.75629,-122.47315],[37.7563,-122.47304],[37.7563,-122.47293],[37.75631,-122.4728],[37.75622,-122.47274],[37.756,-122.47251],[37.75592,-122.4724],[37.75575,-122.4722],[37.75576,-122.47201],[37.75584,-122.47193],[37.75594,-122.47186],[37.75598,-122.4719],[37.75599,-122.47187],[37.75601,-122.47187],[37.756,-122.47188],[37.756,-122.47189],[37.75602,-122.47188],[37.75603,-122.47176],[37.75621,-122.47178],[37.75627,-122.47179],[37.75636,-122.47176],[37.75641,-122.47178],[37.75633,-122.47173],[37.75608,-122.47175],[37.75619,-122.47158],[37.75636,-122.47146],[37.75637,-122.47136],[37.75636,-122.47123],[37.75634,-122.47105],[37.75585,-122.47106],[37.75557,-122.47109],[37.75524,-122.47115],[37.75493,-122.47104],[37.7545,-122.47111],[37.75406,-122.47111],[37.75366,-122.47125],[37.75329,-122.47119],[37.7529,-122.47105],[37.7525,-122.47083],[37.75217,-122.47062],[37.7519,-122.47055],[37.75148,-122.47069],[37.75116,-122.47082],[37.75089,-122.47097],[37.75063,-122.47104],[37.75032,-122.47095],[37.74987,-122.47092],[37.74958,-122.4708],[37.74897,-122.47051],[37.74885,-122.47032],[37.74884,-122.47001],[37.74887,-122.46965],[37.74892,-122.46905],[37.74892,-122.46868],[37.74873,-122.46841],[37.74831,-122.46838],[37.74786,-122.46834],[37.74735,-122.46831],[37.74714,-122.46819],[37.74718,-122.46762],[37.7472,-122.46716],[37.74731,-122.46677],[37.74735,-122.46642],[37.74745,-122.46605],[37.74742,-122.46571],[37.7473,-122.46566],[37.74714,-122.4656],[37.74695,-122.46554],[37.74695,-122.46525],[37.74693,-122.46499],[37.74687,-122.46466],[37.74675,-122.4645],[37.74662,-122.46405],[37.7466,-122.46371],[37.74664,-122.46318],[37.74672,-122.46284],[37.74661,-122.46267],[37.74649,-122.46249],[37.74639,-122.46236],[37.74628,-122.46225],[37.7462,-122.46213],[37.7465,-122.46177],[37.74684,-122.46125],[37.74719,-122.46083],[37.74757,-122.46035],[37.74773,-122.45997],[37.74799,-122.45974],[37.74803,-122.45951],[37.7482,-122.45934],[37.74812,-122.45908],[37.7483,-122.45875],[37.74816,-122.45852],[37.74831,-122.45835],[37.74837,-122.45844],[37.74863,-122.45826],[37.74906,-122.4582],[37.7494,-122.45833],[37.74975,-122.45858],[37.75011,-122.45893],[37.74995,-122.45896],[37.74976,-122.45876],[37.74972,-122.45898],[37.75,-122.45912],[37.75025,-122.45931],[37.75044,-122.4596],[37.75076,-122.45987],[37.75098,-122.45975],[37.751,-122.45913],[37.7508,-122.45886],[37.7506,-122.45853],[37.75074,-122.45836],[37.75084,-122.45854],[37.75088,-122.45805],[37.7508,-122.45755],[37.7507,-122.45682],[37.75073,-122.45626],[37.7507,-122.45603],[37.75056,-122.45555],[37.75048,-122.45509],[37.75021,-122.45482],[37.74995,-122.45472],[37.74964,-122.45485],[37.7494,-122.45499],[37.74938,-122.45478],[37.74931,-122.45511],[37.74927,-122.45543],[37.74918,-122.45514],[37.74908,-122.4552],[37.74895,-122.4552],[37.74889,-122.45492],[37.74881,-122.45469],[37.74873,-122.45489],[37.74856,-122.45452],[37.74844,-122.45422],[37.74823,-122.45408],[37.74833,-122.45387],[37.74843,-122.45358],[37.74856,-122.45315],[37.74847,-122.45291],[37.74838,-122.45285],[37.74851,-122.45256],[37.74824,-122.45259],[37.74805,-122.45247],[37.74785,-122.45208],[37.7477,-122.4518],[37.7476,-122.45156],[37.74734,-122.45126],[37.74721,-122.45114],[37.74719,-122.45111],[37.74703,-122.45098],[37.74682,-122.45067],[37.7468,-122.45029],[37.74681,-122.44994],[37.74656,-122.44978],[37.74642,-122.45006],[37.74629,-122.45059],[37.74612,-122.45105],[37.74584,-122.45146],[37.74573,-122.45169],[37.7456,-122.4519],[37.74556,-122.452],[37.74529,-122.45172],[37.745,-122.45212],[37.74487,-122.4523],[37.74475,-122.45243],[37.74497,-122.45221],[37.74514,-122.45196],[37.74533,-122.45166],[37.74547,-122.45142],[37.74562,-122.45106],[37.74584,-122.45034],[37.74594,-122.44979],[37.74607,-122.44889],[37.74619,-122.44842],[37.74634,-122.44778],[37.74605,-122.44758],[37.74577,-122.44766],[37.74568,-122.44776],[37.74566,-122.44753],[37.74554,-122.44764],[37.74553,-122.4475],[37.7454,-122.44719],[37.74517,-122.44693],[37.74487,-122.44675],[37.74445,-122.44663],[37.7441,-122.44645],[37.74389,-122.44622],[37.74363,-122.44592],[37.74341,-122.44577],[37.74308,-122.44541],[37.74303,-122.44551],[37.74287,-122.44541],[37.74263,-122.44515],[37.74243,-122.44467],[37.74222,-122.44433],[37.74203,-122.44409],[37.74186,-122.44384],[37.74188,-122.44346],[37.74186,-122.44282],[37.74158,-122.4425],[37.74122,-122.44224],[37.74091,-122.44196],[37.7407,-122.44166],[37.74048,-122.44153],[37.74019,-122.4414],[37.74002,-122.44134],[37.73973,-122.44122],[37.73933,-122.44108],[37.73892,-122.44096],[37.73852,-122.44091],[37.73806,-122.44082],[37.7375,-122.44058],[37.7371,-122.44047],[37.73697,-122.44037],[37.7367,-122.43999],[37.73653,-122.43977],[37.73627,-122.43986],[37.73601,-122.43976],[37.73572,-122.43971],[37.73555,-122.43945],[37.73543,-122.43897],[37.73521,-122.43869],[37.73485,-122.43827],[37.73474,-122.43804],[37.73465,-122.43772],[37.7345,-122.43722],[37.73433,-122.43674],[37.73423,-122.43633],[37.73412,-122.43565],[37.73404,-122.43508],[37.73401,-122.43467],[37.73394,-122.43428],[37.73402,-122.434],[37.73413,-122.43401],[37.73416,-122.43386],[37.73437,-122.43387],[37.73445,-122.43346],[37.73448,-122.43292],[37.7345,-122.4325],[37.73451,-122.43209],[37.7344,-122.43181],[37.73404,-122.43176],[37.73392,-122.43147],[37.73416,-122.43106],[37.73447,-122.43056],[37.73481,-122.43002],[37.73517,-122.42949],[37.73546,-122.42896],[37.73529,-122.42876],[37.73527,-122.42853],[37.73542,-122.42836],[37.73558,-122.42817],[37.73581,-122.42793],[37.73615,-122.4275],[37.7365,-122.42703],[37.73627,-122.42661],[37.73606,-122.42639],[37.73571,-122.4269],[37.73536,-122.42745],[37.73514,-122.42788],[37.73495,-122.42824],[37.7349,-122.4281],[37.73473,-122.42768],[37.73462,-122.42744],[37.73444,-122.42695],[37.73418,-122.42672],[37.73395,-122.42631],[37.73377,-122.42632],[37.73368,-122.42574],[37.73363,-122.42526],[37.73362,-122.42449],[37.73365,-122.42383],[37.73376,-122.42309],[37.73394,-122.42228],[37.73374,-122.42187],[37.73347,-122.42173],[37.73322,-122.42144],[37.73301,-122.42129],[37.73273,-122.42104],[37.73235,-122.42085],[37.73197,-122.4207],[37.73146,-122.42048],[37.73125,-122.42025],[37.73094,-122.42027],[37.73056,-122.42029],[37.73021,-122.42034],[37.72994,-122.42038],[37.72973,-122.42045],[37.72941,-122.42056],[37.72929,-122.42052],[37.72917,-122.4205],[37.72902,-122.42054],[37.7291,-122.42007],[37.72912,-122.41963],[37.72865,-122.41942],[37.72813,-122.4192],[37.72764,-122.419],[37.72718,-122.4188],[37.72674,-122.41862],[37.72611,-122.41838],[37.72578,-122.41823],[37.7252,-122.41798],[37.72484,-122.41783],[37.72458,-122.41773],[37.72419,-122.41757],[37.72402,-122.41779],[37.72392,-122.41818],[37.7236,-122.41843],[37.72306,-122.41854],[37.72271,-122.41878],[37.72242,-122.41876],[37.72227,-122.41829],[37.72217,-122.41745],[37.72204,-122.41677],[37.72195,-122.4163],[37.72186,-122.41591],[37.72185,-122.41564],[37.72165,-122.41521],[37.72146,-122.4148],[37.72117,-122.41457],[37.72104,-122.41449],[37.72089,-122.41478],[37.72083,-122.41425],[37.72079,-122.41387],[37.72062,-122.41391],[37.72036,-122.41428],[37.72038,-122.41405],[37.72034,-122.4136],[37.72032,-122.41304],[37.72004,-122.41269],[37.71967,-122.41259],[37.71935,-122.41252],[37.71935,-122.41214],[37.7191,-122.41184],[37.71863,-122.41167],[37.71854,-122.41113],[37.7184,-122.41078],[37.71839,-122.41054],[37.71818,-122.41045],[37.71813,-122.4103],[37.71812,-122.41026],[37.71805,-122.41006],[37.71788,-122.40987],[37.71779,-122.40977],[37.71772,-122.40973],[37.7176,-122.40961],[37.71751,-122.40933],[37.71771,-122.40912],[37.7179,-122.4089],[37.71803,-122.40847],[37.71798,-122.40804],[37.71784,-122.40754],[37.71749,-122.40767],[37.71709,-122.40753],[37.71702,-122.40727],[37.71691,-122.40689],[37.71675,-122.40652],[37.71666,-122.40669],[37.7165,-122.40661],[37.71641,-122.40639],[37.71634,-122.40647],[37.7163,-122.40659],[37.71618,-122.40648],[37.71598,-122.40622],[37.71572,-122.40606],[37.71542,-122.4062],[37.71515,-122.406],[37.71489,-122.40588],[37.71453,-122.40586],[37.71428,-122.40567],[37.71415,-122.4057],[37.71397,-122.40573],[37.71367,-122.40583],[37.71339,-122.40604],[37.71304,-122.4062],[37.71268,-122.40628],[37.71228,-122.40637],[37.71231,-122.4064],[37.71221,-122.40615],[37.71207,-122.40576],[37.71194,-122.40544],[37.71179,-122.40503],[37.71166,-122.40463],[37.71153,-122.40429],[37.71138,-122.40393],[37.71135,-122.40377],[37.71136,-122.40336],[37.71167,-122.4031],[37.71195,-122.40274],[37.71213,-122.40223],[37.71218,-122.40174],[37.71207,-122.40123],[37.71198,-122.40074],[37.71186,-122.40023],[37.71177,-122.39988],[37.71163,-122.39928],[37.71147,-122.3987],[37.71135,-122.39816],[37.71128,-122.39784],[37.71118,-122.3974],[37.71107,-122.39704],[37.71097,-122.39653],[37.71089,-122.39596],[37.71103,-122.39506],[37.71112,-122.39466],[37.71129,-122.39431],[37.71125,-122.39392],[37.71122,-122.39356],[37.71119,-122.39289],[37.71117,-122.39235],[37.71112,-122.39151],[37.71106,-122.39092],[37.71073,-122.39073],[37.71052,-122.39072],[37.71019,-122.39088],[37.71009,-122.39114],[37.70981,-122.39144],[37.70964,-122.39109],[37.70947,-122.39071],[37.70943,-122.39051],[37.7094,-122.39039],[37.70975,-122.39001],[37.70969,-122.38945],[37.7094,-122.38902],[37.7091,-122.38847],[37.70907,-122.38845],[37.70903,-122.38835],[37.70913,-122.38793],[37.70956,-122.38757],[37.70995,-122.38698],[37.71046,-122.38685],[37.71084,-122.38655],[37.71046,-122.38592],[37.71012,-122.38552],[37.70973,-122.38506],[37.70947,-122.38446],[37.70938,-122.38397],[37.70933,-122.38338],[37.70929,-122.3827],[37.70933,-122.38197],[37.70927,-122.38156],[37.70931,-122.38108],[37.70905,-122.38052],[37.7087,-122.37978],[37.70855,-122.37904],[37.70856,-122.37819],[37.70857,-122.37734],[37.70853,-122.37664],[37.70851,-122.37619],[37.70855,-122.37551],[37.70857,-122.37504],[37.70864,-122.37475],[37.70881,-122.37459],[37.70902,-122.37613],[37.70872,-122.37657],[37.70858,-122.37721],[37.70855,-122.3781],[37.70858,-122.37881],[37.70863,-122.37952],[37.70886,-122.38023],[37.70893,-122.38039],[37.70909,-122.38063],[37.70942,-122.38134]];
+
+  // Leg 2: Lake Merced → Embarcadero (ink color)
+  var leg2 = [[37.71502,-122.50075],[37.71498,-122.50075],[37.71424,-122.50323],[37.71422,-122.50323],[37.71419,-122.50314],[37.71432,-122.50297],[37.71446,-122.50267],[37.71458,-122.50275],[37.71485,-122.503],[37.71537,-122.50336],[37.71584,-122.50354],[37.71626,-122.50362],[37.71664,-122.50333],[37.71704,-122.50278],[37.71754,-122.50252],[37.71806,-122.5027],[37.71884,-122.50307],[37.71939,-122.5031],[37.71977,-122.50305],[37.72014,-122.50295],[37.72052,-122.50266],[37.72076,-122.50255],[37.72057,-122.50224],[37.72036,-122.5019],[37.7201,-122.50167],[37.71976,-122.50143],[37.71962,-122.50121],[37.71932,-122.50089],[37.7191,-122.5007],[37.71902,-122.50061],[37.71909,-122.50045],[37.71913,-122.49987],[37.71956,-122.50003],[37.7202,-122.50014],[37.72071,-122.50032],[37.72124,-122.50065],[37.72161,-122.50098],[37.72196,-122.50131],[37.72247,-122.50177],[37.72296,-122.5022],[37.72352,-122.50258],[37.72408,-122.50279],[37.72464,-122.50288],[37.72525,-122.50285],[37.72585,-122.50269],[37.72636,-122.50246],[37.72658,-122.50193],[37.72654,-122.50127],[37.72666,-122.50063],[37.72647,-122.5],[37.7262,-122.4996],[37.72604,-122.49925],[37.72564,-122.4988],[37.72514,-122.49816],[37.72457,-122.49765],[37.72437,-122.49732],[37.72411,-122.49689],[37.72397,-122.49632],[37.72391,-122.49587],[37.72398,-122.49539],[37.72435,-122.49493],[37.72465,-122.49439],[37.7249,-122.49389],[37.72521,-122.49354],[37.72565,-122.49335],[37.72611,-122.49326],[37.72634,-122.49335],[37.72642,-122.49323],[37.72659,-122.49322],[37.72675,-122.49333],[37.72722,-122.49342],[37.72777,-122.49347],[37.72793,-122.49361],[37.7281,-122.49395],[37.72834,-122.49383],[37.72871,-122.49374],[37.72919,-122.49422],[37.72954,-122.4943],[37.72993,-122.49427],[37.73053,-122.49431],[37.73092,-122.49434],[37.73138,-122.49437],[37.73181,-122.49433],[37.73201,-122.49392],[37.73205,-122.49314],[37.73208,-122.49258],[37.73239,-122.49226],[37.7327,-122.49229],[37.73307,-122.49233],[37.73359,-122.49233],[37.73372,-122.49191],[37.73383,-122.49167],[37.73421,-122.49136],[37.73471,-122.49139],[37.73515,-122.4914],[37.73556,-122.49143],[37.7361,-122.49147],[37.73651,-122.49152],[37.73692,-122.49153],[37.73714,-122.49153],[37.73736,-122.49108],[37.73734,-122.49073],[37.73735,-122.49042],[37.73728,-122.49002],[37.73716,-122.48995],[37.73666,-122.48934],[37.73642,-122.48866],[37.73629,-122.48778],[37.73622,-122.48755],[37.73619,-122.487],[37.73615,-122.48633],[37.73623,-122.48562],[37.73635,-122.48511],[37.73664,-122.48459],[37.73682,-122.48412],[37.7369,-122.48358],[37.73685,-122.4828],[37.73689,-122.48253],[37.73682,-122.48204],[37.73671,-122.48146],[37.73658,-122.48095],[37.73648,-122.4806],[37.73647,-122.48008],[37.73638,-122.47959],[37.73619,-122.47894],[37.73617,-122.47842],[37.7361,-122.47833],[37.73593,-122.47812],[37.73601,-122.47791],[37.73606,-122.47749],[37.73611,-122.47725],[37.73617,-122.4771],[37.73625,-122.47715],[37.73635,-122.47726],[37.7364,-122.47713],[37.73652,-122.47746],[37.7366,-122.47727],[37.73668,-122.47732],[37.73696,-122.47715],[37.73689,-122.4767],[37.73696,-122.47618],[37.7371,-122.47596],[37.73727,-122.47565],[37.73746,-122.47547],[37.73758,-122.4755],[37.73783,-122.47519],[37.73825,-122.47523],[37.73882,-122.47524],[37.73926,-122.47519],[37.73929,-122.47477],[37.73916,-122.47446],[37.73863,-122.47442],[37.73827,-122.47439],[37.73802,-122.47436],[37.73779,-122.47435],[37.73747,-122.47408],[37.73744,-122.47363],[37.73749,-122.47316],[37.73764,-122.47285],[37.73765,-122.47263],[37.73766,-122.47236],[37.73769,-122.47209],[37.7377,-122.47171],[37.73771,-122.47123],[37.73775,-122.47066],[37.73797,-122.47041],[37.73836,-122.46998],[37.73847,-122.46961],[37.73826,-122.46929],[37.7382,-122.46904],[37.73849,-122.46869],[37.73882,-122.46831],[37.73898,-122.46814],[37.73917,-122.46793],[37.7394,-122.46764],[37.7398,-122.46719],[37.74018,-122.46671],[37.74049,-122.46639],[37.74079,-122.4661],[37.7408,-122.46569],[37.74089,-122.46565],[37.74111,-122.46584],[37.74126,-122.466],[37.74137,-122.46619],[37.74149,-122.46614],[37.74146,-122.46575],[37.74162,-122.4656],[37.74205,-122.46529],[37.74236,-122.46503],[37.74274,-122.46482],[37.74312,-122.46476],[37.74352,-122.46472],[37.74361,-122.46452],[37.74361,-122.46401],[37.74356,-122.46352],[37.74335,-122.46269],[37.74319,-122.46222],[37.74318,-122.462],[37.7432,-122.46199],[37.74336,-122.46178],[37.74362,-122.46146],[37.74349,-122.4614],[37.74299,-122.46171],[37.74282,-122.46159],[37.74273,-122.46144],[37.74288,-122.46165],[37.74334,-122.46167],[37.7437,-122.46121],[37.7438,-122.46079],[37.74382,-122.46052],[37.74382,-122.46015],[37.74365,-122.4601],[37.74343,-122.46034],[37.74326,-122.46065],[37.74311,-122.46094],[37.74289,-122.4608],[37.74244,-122.46036],[37.74221,-122.46013],[37.74213,-122.45998],[37.74206,-122.45987],[37.74183,-122.45944],[37.74176,-122.45929],[37.74196,-122.45876],[37.74221,-122.45829],[37.74226,-122.45787],[37.74225,-122.45738],[37.74214,-122.45701],[37.74232,-122.45667],[37.74258,-122.45653],[37.74288,-122.45639],[37.74327,-122.45619],[37.7436,-122.45575],[37.7439,-122.45545],[37.74423,-122.45509],[37.74464,-122.45464],[37.74482,-122.45413],[37.74469,-122.45368],[37.74501,-122.45305],[37.74516,-122.45281],[37.74538,-122.45239],[37.74554,-122.45208],[37.74565,-122.45188],[37.74586,-122.45147],[37.74602,-122.45103],[37.74609,-122.4507],[37.74618,-122.45033],[37.74626,-122.44997],[37.74642,-122.44967],[37.74668,-122.44925],[37.74704,-122.44902],[37.74745,-122.44884],[37.74795,-122.44862],[37.74821,-122.44845],[37.74846,-122.44831],[37.74875,-122.44814],[37.74906,-122.44795],[37.74943,-122.4477],[37.74963,-122.44758],[37.74967,-122.44739],[37.74978,-122.44746],[37.74993,-122.44758],[37.75003,-122.44757],[37.75019,-122.44793],[37.75026,-122.44817],[37.7504,-122.44811],[37.75045,-122.44828],[37.75042,-122.44849],[37.75068,-122.44843],[37.75088,-122.44845],[37.75102,-122.44844],[37.75114,-122.44829],[37.7513,-122.44813],[37.75139,-122.44787],[37.7515,-122.44777],[37.75161,-122.4477],[37.7518,-122.44764],[37.75193,-122.44765],[37.75209,-122.44761],[37.75223,-122.4476],[37.75228,-122.44753],[37.75255,-122.44752],[37.75278,-122.44758],[37.75295,-122.44752],[37.75309,-122.4474],[37.75318,-122.44733],[37.75332,-122.44739],[37.75347,-122.44724],[37.75359,-122.44716],[37.75384,-122.4472],[37.75389,-122.44738],[37.75411,-122.44709],[37.75435,-122.44666],[37.7546,-122.44636],[37.75476,-122.4464],[37.75484,-122.44649],[37.75486,-122.44661],[37.75495,-122.44682],[37.75507,-122.44718],[37.75498,-122.44752],[37.75506,-122.44765],[37.75522,-122.44767],[37.75544,-122.44774],[37.75568,-122.44791],[37.75576,-122.44762],[37.75556,-122.4472],[37.75537,-122.44685],[37.7554,-122.44637],[37.75548,-122.44598],[37.75556,-122.44551],[37.75584,-122.44525],[37.75597,-122.44564],[37.75586,-122.44598],[37.75593,-122.44634],[37.7562,-122.44665],[37.75643,-122.44685],[37.75675,-122.44703],[37.75706,-122.44729],[37.75729,-122.4477],[37.75765,-122.44799],[37.75804,-122.44828],[37.75843,-122.44842],[37.75887,-122.44846],[37.75912,-122.44843],[37.75916,-122.44819],[37.75924,-122.44814],[37.75936,-122.44795],[37.75958,-122.4476],[37.7596,-122.44758],[37.75976,-122.44753],[37.76004,-122.44762],[37.7601,-122.44768],[37.76013,-122.44773],[37.76022,-122.44765],[37.76023,-122.44754],[37.76028,-122.44739],[37.76032,-122.44726],[37.76035,-122.44702],[37.7605,-122.44693],[37.76079,-122.44677],[37.76104,-122.44665],[37.76138,-122.44668],[37.76179,-122.44692],[37.76188,-122.44666],[37.76191,-122.44642],[37.76203,-122.44646],[37.76217,-122.44646],[37.76227,-122.44645],[37.76245,-122.44634],[37.76277,-122.44618],[37.76302,-122.44609],[37.76318,-122.44578],[37.76319,-122.44546],[37.76326,-122.4455],[37.76333,-122.44554],[37.76327,-122.4454],[37.76338,-122.44523],[37.76338,-122.44503],[37.76329,-122.44488],[37.76368,-122.44464],[37.76426,-122.4443],[37.76449,-122.44405],[37.76485,-122.44401],[37.76505,-122.44399],[37.76525,-122.44359],[37.76551,-122.44323],[37.76569,-122.44291],[37.76587,-122.44267],[37.76612,-122.44247],[37.76631,-122.44222],[37.76667,-122.4419],[37.76697,-122.44174],[37.76732,-122.44164],[37.76757,-122.44141],[37.76776,-122.44135],[37.76788,-122.44142],[37.76802,-122.4413],[37.76806,-122.44105],[37.76816,-122.44089],[37.76822,-122.4407],[37.76829,-122.44038],[37.76844,-122.44006],[37.76861,-122.43979],[37.76883,-122.43972],[37.76893,-122.43957],[37.76893,-122.43928],[37.76905,-122.43899],[37.76907,-122.43872],[37.76912,-122.43823],[37.76933,-122.43841],[37.7695,-122.43858],[37.76972,-122.4388],[37.76993,-122.43903],[37.77002,-122.43906],[37.77007,-122.43885],[37.7701,-122.43854],[37.77015,-122.43813],[37.77019,-122.43784],[37.77023,-122.43755],[37.77025,-122.43725],[37.77028,-122.43702],[37.77045,-122.43677],[37.77049,-122.43643],[37.77055,-122.43606],[37.77059,-122.43569],[37.77063,-122.43543],[37.77041,-122.43508],[37.77007,-122.43501],[37.76974,-122.43483],[37.76974,-122.4343],[37.76965,-122.4338],[37.76975,-122.43321],[37.76974,-122.43326],[37.7701,-122.43345],[37.77041,-122.4335],[37.77081,-122.43354],[37.77119,-122.43361],[37.77157,-122.43365],[37.77181,-122.43358],[37.77178,-122.4338],[37.77206,-122.43375],[37.77253,-122.43385],[37.77291,-122.43395],[37.77339,-122.43403],[37.77375,-122.43411],[37.774,-122.43415],[37.7743,-122.43421],[37.77469,-122.43428],[37.77489,-122.43431],[37.77524,-122.4344],[37.77557,-122.43455],[37.77574,-122.43461],[37.77603,-122.43407],[37.77613,-122.43381],[37.77624,-122.43349],[37.77654,-122.43331],[37.77655,-122.43311],[37.77657,-122.43266],[37.77662,-122.4322],[37.77668,-122.43183],[37.77672,-122.43138],[37.77678,-122.4308],[37.77686,-122.43028],[37.77693,-122.42973],[37.77701,-122.42911],[37.77713,-122.4283],[37.7769,-122.42796],[37.77633,-122.42783],[37.77597,-122.42762],[37.77607,-122.42765],[37.77618,-122.4278],[37.77628,-122.42739],[37.77639,-122.42695],[37.77644,-122.42627],[37.77652,-122.42562],[37.77659,-122.4248],[37.77669,-122.42423],[37.77685,-122.42364],[37.77678,-122.42329],[37.77689,-122.42248],[37.77695,-122.422],[37.77702,-122.42143],[37.77706,-122.42109],[37.77713,-122.42045],[37.77732,-122.41995],[37.77769,-122.41962],[37.77821,-122.41973],[37.77842,-122.41976],[37.77871,-122.4198],[37.77909,-122.41988],[37.77952,-122.41997],[37.77997,-122.42008],[37.78048,-122.42018],[37.78078,-122.42024],[37.78101,-122.42028],[37.78161,-122.4204],[37.78218,-122.42052],[37.78253,-122.42061],[37.78285,-122.42066],[37.78332,-122.42075],[37.78373,-122.42085],[37.78421,-122.42096],[37.78459,-122.421],[37.78483,-122.42106],[37.78529,-122.42116],[37.78572,-122.42097],[37.78601,-122.4204],[37.78593,-122.41986],[37.78624,-122.41989],[37.7869,-122.42006],[37.7872,-122.41993],[37.78753,-122.42002],[37.78804,-122.42015],[37.78836,-122.42026],[37.78889,-122.42039],[37.78955,-122.42046],[37.78966,-122.42045],[37.79006,-122.42055],[37.79039,-122.4206],[37.79055,-122.42046],[37.79064,-122.41996],[37.79071,-122.41941],[37.79072,-122.41909],[37.79076,-122.41872],[37.79084,-122.41823],[37.7909,-122.41779],[37.79097,-122.41739],[37.79102,-122.41688],[37.79104,-122.41657],[37.79109,-122.41627],[37.7911,-122.41595],[37.79131,-122.41586],[37.79138,-122.41543],[37.79135,-122.41501],[37.79138,-122.41459],[37.7915,-122.41413],[37.79147,-122.41371],[37.79156,-122.41346],[37.79169,-122.41289],[37.79176,-122.41241],[37.79204,-122.41247],[37.79219,-122.41225],[37.79222,-122.412],[37.79248,-122.41194],[37.79269,-122.41182],[37.79273,-122.41147],[37.79283,-122.41097],[37.79282,-122.41071],[37.79281,-122.41041],[37.79285,-122.41011],[37.79287,-122.40981],[37.79293,-122.40946],[37.79303,-122.40933],[37.793,-122.40901],[37.79307,-122.40875],[37.79316,-122.40835],[37.79318,-122.40808],[37.79323,-122.40783],[37.79325,-122.40768],[37.79329,-122.40733],[37.79349,-122.40737],[37.79391,-122.40749],[37.79415,-122.40737],[37.79418,-122.40697],[37.79449,-122.40682],[37.79481,-122.40688],[37.79516,-122.40695],[37.79514,-122.40663],[37.79529,-122.40652],[37.79558,-122.40651],[37.79587,-122.4066],[37.79608,-122.40672],[37.79664,-122.40671],[37.79708,-122.40685],[37.79736,-122.40691],[37.79783,-122.40708],[37.79798,-122.40703],[37.79812,-122.40692],[37.79834,-122.40714],[37.7985,-122.40718],[37.79884,-122.40721],[37.79906,-122.4073],[37.79933,-122.40739],[37.79975,-122.40741],[37.80009,-122.40757],[37.80044,-122.40762],[37.80055,-122.40785],[37.80048,-122.40823],[37.80045,-122.40866],[37.80049,-122.40914],[37.80057,-122.40941],[37.80098,-122.40958],[37.80124,-122.40959],[37.8017,-122.40954],[37.80204,-122.40957],[37.80227,-122.40947],[37.8023,-122.40918],[37.80236,-122.4088],[37.80248,-122.40853],[37.80247,-122.40815],[37.80247,-122.40788],[37.80254,-122.40738],[37.80254,-122.40717],[37.80258,-122.40701],[37.80262,-122.40674],[37.80261,-122.40663],[37.80262,-122.40655],[37.80262,-122.40637],[37.80261,-122.40617],[37.80254,-122.40588],[37.8027,-122.40568],[37.80276,-122.4056],[37.80282,-122.40555],[37.80288,-122.40545],[37.80288,-122.40534],[37.80289,-122.40522],[37.80286,-122.4051],[37.80284,-122.405],[37.8028,-122.40481],[37.8025,-122.40469],[37.80256,-122.4047],[37.80273,-122.4047],[37.80285,-122.40471],[37.80291,-122.40464],[37.80292,-122.40453],[37.80294,-122.40425],[37.80295,-122.404],[37.80301,-122.40384],[37.80305,-122.40375],[37.80303,-122.40367],[37.80303,-122.40361],[37.80303,-122.40335],[37.80311,-122.40237],[37.80335,-122.40194],[37.80319,-122.40175],[37.80298,-122.40128],[37.80308,-122.4009],[37.80352,-122.40116],[37.8037,-122.40119]];
+
+  // Draw polylines — NEVER connected
+  L.polyline(leg1, { color: '#f05324', weight: 3, opacity: 0.9 }).addTo(map);
+  L.polyline(leg2, { color: '#18282a', weight: 3, opacity: 0.85 }).addTo(map);
+
+  // Start/end markers (small circles)
+  var orangeOpt = { radius: 6, color: '#f05324', fillColor: '#f05324', fillOpacity: 1, weight: 2 };
+  var inkOpt    = { radius: 6, color: '#18282a', fillColor: '#18282a', fillOpacity: 1, weight: 2 };
+  var whiteOpt  = { radius: 6, color: '#f05324', fillColor: '#fff', fillOpacity: 1, weight: 2 };
+  var white2Opt = { radius: 6, color: '#18282a', fillColor: '#fff', fillOpacity: 1, weight: 2 };
+
+  L.circleMarker(leg1[0], orangeOpt).bindTooltip('Start: GGB South').addTo(map);
+  L.circleMarker(leg1[leg1.length-1], whiteOpt).bindTooltip('End: Candlestick').addTo(map);
+  L.circleMarker(leg2[0], inkOpt).bindTooltip('Start: Lake Merced').addTo(map);
+  L.circleMarker(leg2[leg2.length-1], white2Opt).bindTooltip('End: Embarcadero').addTo(map);
+})();
+
+// ── FORM SUBMIT ──
+(function() {
+  var form = document.getElementById('signup-form');
+  var success = document.getElementById('form-success');
+  if (!form) return;
+  // Google Forms submits to a hidden iframe — no CORS issue, no fetch needed
+  form.addEventListener('submit', function() {
+    setTimeout(function() {
+      form.querySelectorAll('input, textarea').forEach(function(el) { el.value = ''; });
+      form.querySelector('.form-submit').style.display = 'none';
+      success.style.display = 'block';
+    }, 400);
+  });
+})();
+</script>
+
+</body></html>
