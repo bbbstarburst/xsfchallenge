@@ -353,11 +353,7 @@ a:hover { text-decoration: underline; }
 .section-dark {
   background: var(--ink);
   color: var(--paper);
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 72px;
-  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
-  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
 }
 .section-dark .section-label { color: var(--paper); opacity: 0.5; }
 .section-dark .section-title { color: var(--paper); }
@@ -526,7 +522,7 @@ a:hover { text-decoration: underline; }
     </svg>
     XSF Challenge
   </h1>
-  <p class="hero-sub">A self-supported urban endurance adventure across San Francisco. Two legs. One long day. Golden Gate Bridge to the Embarcadero, on foot.</p>
+  <p class="hero-sub">A self-supported urban endurance adventure across San Francisco. Golden Gate Bridge to the Embarcadero, on foot, the long way.</p>
   <div class="hero-meta">
     <span class="hero-pill"><span class="dot"></span>Golden Gate to Embarcadero</span>
     <span class="hero-pill"><span class="dot"></span>~34 miles total</span>
@@ -540,7 +536,7 @@ a:hover { text-decoration: underline; }
 <section class="section" id="route">
   <p class="section-label">The Route</p>
   <h2 class="section-title">Across the city, twice</h2>
-  <p class="section-body">The XSF Challenge traces two distinct legs across San Francisco — from the Golden Gate Bridge south through the neighborhoods to Candlestick, then back north from Lake Merced to the Embarcadero. The gap between legs is intentional. You choose your crossing.</p>
+  <p class="section-body">The XSF Challenge traces two distinct legs across San Francisco — from the Golden Gate Bridge south through the neighborhoods to Candlestick, then back north from Lake Merced to the Embarcadero. The gap between legs is a vehicle transfer — part of the route, not a shortcut.</p>
   <div id="map"></div>
   <div class="map-legend">
     <div class="legend-item">
@@ -557,13 +553,13 @@ a:hover { text-decoration: underline; }
       <div class="route-card-label">Leg 1</div>
       <h3>GGB South → Candlestick</h3>
       <p>Starting at the south anchorage of the Golden Gate Bridge, the first leg traces a path through the Richmond, Inner Sunset, and Bayview neighborhoods to Candlestick Point.</p>
-      <div class="route-stat">~26<span class="route-stat-unit">km</span></div>
+      <div class="route-stat">~16<span class="route-stat-unit">mi</span></div>
     </div>
     <div class="route-card">
       <div class="route-card-label">Leg 2</div>
       <h3>Lake Merced → Embarcadero</h3>
       <p>The return leg begins at Lake Merced and winds north through the Sunset, Western Addition, and Financial District to finish at the Embarcadero waterfront.</p>
-      <div class="route-stat">~24<span class="route-stat-unit">km</span></div>
+      <div class="route-stat">~18<span class="route-stat-unit">mi</span></div>
     </div>
   </div>
 </section>
@@ -698,7 +694,7 @@ a:hover { text-decoration: underline; }
 
   // Draw polylines — NEVER connected
   L.polyline(leg1, { color: '#f05324', weight: 3, opacity: 0.9 }).addTo(map);
-  L.polyline(leg2, { color: '#18282a', weight: 3, opacity: 0.85 }).addTo(map);
+  L.polyline(leg2, { color: '#4a7c7e', weight: 3, opacity: 0.95 }).addTo(map);
 
   // Start/end markers (small circles)
   var orangeOpt = { radius: 6, color: '#f05324', fillColor: '#f05324', fillOpacity: 1, weight: 2 };
